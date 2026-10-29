@@ -8,6 +8,7 @@ typedef struct Node
 } Node;
 typedef struct LinkedList {
 	Node *head;
+	Node* tail;
 	int count;
 } LinkedList;
 
