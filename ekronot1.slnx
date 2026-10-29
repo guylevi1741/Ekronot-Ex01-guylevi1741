@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="ekronot1/ekronot1.vcxproj" Id="9d6c74d6-2237-43ef-88af-9ec61308be48" />
+</Solution>
