@@ -31,7 +31,7 @@ int test1()
 	try
 	{
 
-	
+
 		Stack* s0;
 		try
 		{
@@ -39,17 +39,17 @@ int test1()
 			s0 = new Stack;
 			initStack(s0);
 		}
-		catch(...)
+		catch (...)
 		{
-				// stack failed to initialize - test failed
-				cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-				cout << " \n" << endl;
-				return 1211;
+			// stack failed to initialize - test failed
+			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << " \n" << endl;
+			return 1211;
 		}
 		bool empty = isEmpty(s0);
 		cout << "Checking if stack is empty ... \n";
 		cout << "Running Test ... \t";
-		
+
 		if (empty)
 		{
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
@@ -58,8 +58,8 @@ int test1()
 		{
 			// stack is not empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Expected: true\n" 
-			<< "Got     : " << (empty ? "true" : "false") << " \n";
+			cout << "Expected: true\n"
+				<< "Got     : " << (empty ? "true" : "false") << " \n";
 			cout << " \n" << endl;
 			return 1212;
 		}
@@ -77,7 +77,7 @@ int test1()
 		cout << "Popping and printing each element in stack ...\n";
 		cout << "Running Test ... \t";
 
-		if(output == stack0PoppedElements)
+		if (output == stack0PoppedElements)
 		{
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 		}
@@ -100,7 +100,7 @@ int test1()
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 			return 0;
 		}
-		catch(const std::exception& e)
+		catch (const std::exception& e)
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n " << endl;
@@ -113,7 +113,7 @@ int test1()
 	{
 		std::cerr << "\033[1;31mTest crashed\033[0m\n \n" << endl;
 		std::cerr << "\033[1;31mFAILED: The program crashed, check the following things:\n\033[0m\n \n" <<
-			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" << 
+			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" <<
 			"3. Did you remember to initialize array before accessing it?";
 		return 2;
 	}
@@ -135,18 +135,18 @@ int test2()
 			s0 = new Stack;
 			initStack(s0);
 		}
-		catch(...)
+		catch (...)
 		{
-				// stack failed to initialize - test failed
-				cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-				cout << " \n" << endl;
-				return 1211;
+			// stack failed to initialize - test failed
+			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << " \n" << endl;
+			return 1211;
 		}
 
 		bool empty = isEmpty(s0);
 		cout << "Checking if stack is empty ... \n";
 		cout << "Running Test ... \t";
-		
+
 		if (empty)
 		{
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
@@ -155,8 +155,8 @@ int test2()
 		{
 			// stack is not empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Expected: true\n" 
-			<< "Got     : " << (empty ? "true" : "false") << " \n";
+			cout << "Expected: true\n"
+				<< "Got     : " << (empty ? "true" : "false") << " \n";
 			cout << " \n" << endl;
 			return 1212;
 		}
@@ -170,7 +170,7 @@ int test2()
 				push(s0, i);
 			}
 		}
-		catch(...)
+		catch (...)
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n" << endl;
@@ -187,7 +187,7 @@ int test2()
 				pop(s0);
 			}
 		}
-		catch(...)
+		catch (...)
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n" << endl;
@@ -207,15 +207,15 @@ int test2()
 		{
 			// stack is empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Expected: false\n" 
-			<< "Got     : " << (empty ? "true" : "false") << " \n";
+			cout << "Expected: false\n"
+				<< "Got     : " << (empty ? "true" : "false") << " \n";
 			cout << " \n" << endl;
 			return 1218;
 		}
 
 		cout << "Pop 90,000 elements from stack ... " << "\n" << endl;
 		cout << "Running Test ... \t";
-		
+
 		try
 		{
 			for (int i = 0; i < 90000; i++)
@@ -223,7 +223,7 @@ int test2()
 				pop(s0);
 			}
 		}
-		catch(...)
+		catch (...)
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n" << endl;
@@ -235,7 +235,7 @@ int test2()
 		empty = isEmpty(s0);
 		cout << "Checking if stack is empty ... \n";
 		cout << "Running Test ... \t";
-		
+
 		if (empty)
 		{
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
@@ -244,8 +244,8 @@ int test2()
 		{
 			// stack is not empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Expected: true\n" 
-			<< "Got     : " << (empty ? "true" : "false") << " \n";
+			cout << "Expected: true\n"
+				<< "Got     : " << (empty ? "true" : "false") << " \n";
 			cout << " \n" << endl;
 			return 1219;
 		}
@@ -259,7 +259,7 @@ int test2()
 			delete s0;
 			return 0;
 		}
-		catch(const std::exception& e)
+		catch (const std::exception& e)
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n " << endl;
@@ -272,7 +272,7 @@ int test2()
 	{
 		std::cerr << "\033[1;31mTest crashed\033[0m\n \n" << endl;
 		std::cerr << "\033[1;31mFAILED: The program crashed, check the following things:\n\033[0m\n \n" <<
-			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" << 
+			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" <<
 			"3. Did you remember to initialize array before accessing it?";
 		return 2;
 	}
@@ -303,7 +303,7 @@ bool test3()
 		int numbers[10];
 		for (int i = 0; i < 10; i++)
 		{
-			numbers[i] = (i+1) * 2;
+			numbers[i] = (i + 1) * 2;
 		}
 
 		reverse(numbers, 10);
@@ -320,9 +320,9 @@ bool test3()
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << "Using reverse() on array and printing it... " << endl
-			<< "Expected: " << reversedArray << "\n"
-			<< "Got     : " << resultfromReverse
-			<< "\n" << endl;
+				<< "Expected: " << reversedArray << "\n"
+				<< "Got     : " << resultfromReverse
+				<< "\n" << endl;
 			return 1311;
 		}
 	}
@@ -330,7 +330,7 @@ bool test3()
 	{
 		std::cerr << "\033[1;31mTest crashed\033[0m\n \n" << endl;
 		std::cerr << "\033[1;31mFAILED: The program crashed, check the following things:\n\033[0m\n \n" <<
-			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" << 
+			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" <<
 			"3. Did you remember to initialize array before accessing it?";
 		return 2;
 	}
@@ -360,13 +360,13 @@ int main(int argc, char* argv[])
 	else if (atoi(argv[1]) == 2)
 	{
 		result = test2();
-		cout << (result == 0 ?  "\033[1;32m \n****** Part 3 Test 2 Passed ******\033[0m\n \n" : "\033[1;31mPart 3 Test 2 Failed\033[0m\n \n") << endl;
+		cout << (result == 0 ? "\033[1;32m \n****** Part 3 Test 2 Passed ******\033[0m\n \n" : "\033[1;31mPart 3 Test 2 Failed\033[0m\n \n") << endl;
 		return result;
 	}
 	else if (atoi(argv[1]) == 3)
 	{
 		result = test3();
-		cout << (result == 0 ?  "\033[1;32m \n****** Part 4 Test 1 Passed ******\033[0m\n \n" : "\033[1;31mPart 4 Test 1 Failed\033[0m\n \n") << endl;
+		cout << (result == 0 ? "\033[1;32m \n****** Part 4 Test 1 Passed ******\033[0m\n \n" : "\033[1;31mPart 4 Test 1 Failed\033[0m\n \n") << endl;
 		return result;
 	}
 

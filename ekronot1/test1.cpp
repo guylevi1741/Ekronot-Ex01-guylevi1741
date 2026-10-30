@@ -1,18 +1,16 @@
-#include "Stack.h"
-#include "Utils.h"
+#include "Queue.h"
 #include <iostream>
 #include <sstream>
-#include <cstdlib>
 
 using std::cout;
 using std::endl;
 
-std::string popElementsAndGetPrintedStack(Stack* s)
+std::string removeElementsAndGetPrintedQueue(Queue* q)
 {
 	std::stringstream output;
-	while (!isEmpty(s))
+	while (!isEmpty(q))
 	{
-		output << pop(s) << " ";
+		output << dequeue(q) << " ";
 	}
 	// removing the last letter (space)
 	std::string outputString = output.str();
@@ -20,31 +18,36 @@ std::string popElementsAndGetPrintedStack(Stack* s)
 	return outputString;
 }
 
-int test1()
+bool test1()
 {
-	// check basic data structure functions
-	cout <<
-		"*******************************\n" <<
-		"Test 3 - basic stack functions\n" <<
-		"*******************************\n" << endl;
+	bool result = false;
+
 	try
 	{
-		Stack* s0;
+		// check basic data structure functions
+		cout <<
+			"*******************************\n" <<
+			"Test 1 - basic queue functions\n" <<
+			"*******************************\n" << endl;
+
+		Queue* q0;
 		try
 		{
-			cout << " \nInitializing new stack ... \n" << endl;
-			s0 = new Stack;
-			initStack(s0);
+
+			cout << " \nInitializing queue with size 5 ... \n \n" << endl;
+			q0 = new Queue;
+			initQueue(q0, 5);
 		}
 		catch (...)
 		{
-			// stack failed to initialize - test failed
+			// queue failed to initialize - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n" << endl;
-			return 1211;
+			return 1111;
 		}
-		bool empty = isEmpty(s0);
-		cout << "Checking if stack is empty ... \n";
+
+		bool empty = isEmpty(q0);
+		cout << "Checking if queue is empty ... \n";
 		cout << "Running Test ... \t";
 
 		if (empty)
@@ -53,49 +56,65 @@ int test1()
 		}
 		else
 		{
-			// stack is not empty - test failed
+			// queue is not empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << "Expected: true\n"
 				<< "Got     : " << (empty ? "true" : "false") << " \n";
 			cout << " \n" << endl;
-			return 1212;
+			return 1112;
 		}
 
-		const std::string stack0elements = "11 22 33 44 55";
+		const std::string queue0elements = "1 4 9 16 25";
 
-		cout << "Pushing elements to stack ... " << stack0elements << "\n" << endl;
+		cout << "Adding elements to queue ... " << queue0elements << "\n" << endl;
+
 		for (int i = 0; i < 5; i++)
 		{
-			push(s0, (i + 1) * 11);
+			enqueue(q0, (i + 1) * (i + 1));
 		}
 
-		std::string output = popElementsAndGetPrintedStack(s0);
-		const std::string stack0PoppedElements = "55 44 33 22 11";
-		cout << "Popping and printing each element in stack ...\n";
+		bool full = isFull(q0);
+		cout << "Checking if queue is full ... \n";
 		cout << "Running Test ... \t";
 
-		if (output == stack0PoppedElements)
+		if (full)
+		{
+			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
+		}
+		else
+		{
+			// queue is not full - test failed
+			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << "Expected: true\n"
+				<< "Got     : " << (full ? "true" : "false") << " \n";
+			cout << " \n" << endl;
+			return 1113;
+		}
+
+		std::string output = removeElementsAndGetPrintedQueue(q0);
+		cout << "Removing elements and printing queue ...\n";
+		cout << "Running Test ... \t";
+
+		if (output == queue0elements)
 		{
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 		}
 		else
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Expected: " << stack0PoppedElements << "\n"
+			cout << "Expected: " << queue0elements << "\n"
 				<< "Got     : " << output
 				<< " \n " << endl;
 			cout << " \n" << endl;
-			return 1214;
+			return 1114;
 		}
 
 		try
 		{
-			cout << "Cleaning stack...\n" << endl;
+			cout << "Cleaning queue...\n" << endl;
 			cout << "Running Test ... \t";
-			cleanStack(s0);
-			delete s0;
+			cleanQueue(q0);
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
-			return 0;
 		}
 		catch (const std::exception& e)
 		{
@@ -103,98 +122,163 @@ int test1()
 			cout << " \n " << endl;
 			cout << "Received the following error: " << e.what() << "\n"
 				<< " \n " << endl;
-			return 1215;
+			return 1115;
 		}
+
+
+
+		delete q0;
 	}
 	catch (...)
 	{
 		std::cerr << "\033[1;31mTest crashed\033[0m\n \n" << endl;
-		std::cerr << "\033[1;31mFAILED: The program crashed, check the following things:\n\033[0m\n \n" <<
+		std::cerr << "\033[1;31mFAILED: The program crashed, check the following things:\n\033[0m\n.\n" <<
 			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" <<
 			"3. Did you remember to initialize array before accessing it?";
 		return 2;
 	}
+
+	return 0;
+
 }
 
-int test2()
+
+bool test2()
 {
-	// check basic data structure functions
-	cout <<
-		"*******************************\n" <<
-		"Test 3 - More Stack tests\n" <<
-		"*******************************\n" << endl;
+	bool result = false;
+
 	try
 	{
-		Stack* s0;
+		// check basic data structure functions
+		cout <<
+			"*******************************\n" <<
+			"Test 2 - two queues\n" <<
+			"*******************************\n" << endl;
+
+		Queue* q1;
 		try
 		{
-			cout << " \nInitializing new stack ... \n" << endl;
-			s0 = new Stack;
-			initStack(s0);
+
+			cout << " \nInitializing first queue with size 3 ... \n \n" << endl;
+			q1 = new Queue;
+			initQueue(q1, 3);
 		}
 		catch (...)
 		{
-			// stack failed to initialize - test failed
+			// queue failed to initialize - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << " \n" << endl;
-			return 1211;
+			return 1111;
 		}
 
-		bool empty = isEmpty(s0);
-		cout << "Checking if stack is empty ... \n";
-		cout << "Running Test ... \t";
+		const std::string queue1elements = "10 20 30";
 
+		cout << "Adding elements to first queue ... " << queue1elements << "\n \n" << endl << endl;
+
+		for (int i = 0; i < 3; i++)
+		{
+			enqueue(q1, (i + 1) * 10);
+		}
+
+		Queue* q2;
+		try
+		{
+
+			cout << " \nInitializing second queue with size 5 ... \n \n" << endl;
+			q2 = new Queue;
+			initQueue(q2, 5);
+		}
+		catch (...)
+		{
+			// queue failed to initialize - test failed
+			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << " \n" << endl;
+			return 1121;
+		}
+
+		bool empty = isEmpty(q2);
+		cout << "Running Test ... \t";
 		if (empty)
 		{
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 		}
 		else
 		{
-			// stack is not empty - test failed
+			// queue is not empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << "Expected: true\n"
 				<< "Got     : " << (empty ? "true" : "false") << " \n";
 			cout << " \n" << endl;
-			return 1212;
+			return 1112;
 		}
 
-		cout << "Pushing 100,000 elements to stack ... " << "\n" << endl;
+		const std::string queue2elements = "1 2 3 4 5";
+
+		cout << "Adding elements to second queue ... " << queue2elements << "\n" << endl;
 		cout << "Running Test ... \t";
-		try
+		for (int i = 0; i < 5; i++)
 		{
-			for (int i = 0; i < 100000; i++)
-			{
-				push(s0, i);
-			}
+			enqueue(q2, i + 1);
 		}
-		catch (...)
+
+		bool full = isFull(q2);
+
+
+		if (full)
+		{
+			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
+		}
+		else
+		{
+			// queue is not full - test failed
+			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << "Expected: true\n"
+				<< "Got     : " << (full ? "true" : "false") << " \n";
+			cout << " \n" << endl;
+			return 1113;
+		}
+
+		cout << "Using dequeue() on first queue and printing element... \n" << endl;
+		cout << "Running Test ... \t";
+		int dequeueResult = dequeue(q1);
+
+		if (dequeueResult == 10)
+		{
+			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl << endl;
+		}
+		else
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << "Expected: 10\n"
+				<< "Got     : " << dequeueResult << " \n";
 			cout << " \n" << endl;
-			return 1216;
+			return 1122;
 		}
-		cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 
-		cout << "Popping 10,000 elements from stack ... " << "\n" << endl;
+		cout << "Using dequeue() twice on second queue and printing queue... \n" << endl;
 		cout << "Running Test ... \t";
-		try
+		dequeue(q2);
+		dequeue(q2);
+
+		std::string q2output = removeElementsAndGetPrintedQueue(q2);
+
+
+		if (q2output == "3 4 5")
 		{
-			for (int i = 0; i < 10000; i++)
-			{
-				pop(s0);
-			}
+			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 		}
-		catch (...)
+		else
 		{
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
+			cout << "Expected: 3 4 5\n"
+				<< "Got     : " << q2output << " \n" << endl;
 			cout << " \n" << endl;
-			return 1217;
+			return 1114;
 		}
-		cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 
-		empty = isEmpty(s0);
-		cout << "Checking if stack is empty ... \n";
+		cout << "Checking if first queue is empty ... \n";
 		cout << "Running Test ... \t";
+		empty = isEmpty(q1);
 
 		if (!empty)
 		{
@@ -202,59 +286,26 @@ int test2()
 		}
 		else
 		{
-			// stack is empty - test failed
+			// queue is empty - test failed
 			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
 			cout << "Expected: false\n"
-				<< "Got     : " << (empty ? "true" : "false") << " \n";
+				<< "Got     : " << (empty ? "true" : "false") << " \n" << endl;
 			cout << " \n" << endl;
-			return 1218;
-		}
-
-		cout << "Pop 90,000 elements from stack ... " << "\n" << endl;
-		cout << "Running Test ... \t";
-
-		try
-		{
-			for (int i = 0; i < 90000; i++)
-			{
-				pop(s0);
-			}
-		}
-		catch (...)
-		{
-			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << " \n" << endl;
-			return 1217;
-		}
-		cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
-
-
-		empty = isEmpty(s0);
-		cout << "Checking if stack is empty ... \n";
-		cout << "Running Test ... \t";
-
-		if (empty)
-		{
-			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
-		}
-		else
-		{
-			// stack is not empty - test failed
-			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Expected: true\n"
-				<< "Got     : " << (empty ? "true" : "false") << " \n";
-			cout << " \n" << endl;
-			return 1219;
+			return 1123;
 		}
 
 		try
 		{
-			cout << "Cleaning stack...\n" << endl;
+			cout << "Cleaning first queue...\n" << endl;
 			cout << "Running Test ... \t";
-			cleanStack(s0);
+			cleanQueue(q1);
+			delete q1;
 			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
-			delete s0;
-			return 0;
+
+			cout << "Cleaning second queue...\n" << endl;
+			cout << "Running Test ... \t";
+			cleanQueue(q2);
+			delete q2;
 		}
 		catch (const std::exception& e)
 		{
@@ -262,66 +313,9 @@ int test2()
 			cout << " \n " << endl;
 			cout << "Received the following error: " << e.what() << "\n"
 				<< " \n " << endl;
-			return 1215;
+			return 1115;
 		}
-	}
-	catch (...)
-	{
-		std::cerr << "\033[1;31mTest crashed\033[0m\n \n" << endl;
-		std::cerr << "\033[1;31mFAILED: The program crashed, check the following things:\n\033[0m\n \n" <<
-			"1. Did you delete a pointer twice?\n2. Did you access index out of bounds?\n" <<
-			"3. Did you remember to initialize array before accessing it?";
-		return 2;
-	}
-}
-
-std::string arrayToString(int numbers[], int size)
-{
-	std::stringstream output;
-	for (int i = 0; i < size; i++)
-	{
-		output << numbers[i] << " ";
-	}
-	std::string outputString = output.str();
-	outputString = outputString.substr(0, outputString.length() - 1);
-	return outputString;
-}
-
-bool test3()
-{
-	// check basic data structure functions
-	cout <<
-		"*******************************\n" <<
-		"Test 4 - utils\n" <<
-		"*******************************\n" << endl;
-	try
-	{
-		cout << " \nCreating array ... [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]\n" << endl;
-		int numbers[10];
-		for (int i = 0; i < 10; i++)
-		{
-			numbers[i] = (i + 1) * 2;
-		}
-
-		reverse(numbers, 10);
-		cout << "Using reverse() on array and printing it... " << endl;
-		cout << "Running Test ... \t";
-		std::string reversedArray = "20 18 16 14 12 10 8 6 4 2";
-		std::string resultfromReverse = arrayToString(numbers, 10);
-
-		if (resultfromReverse == reversedArray)
-		{
-			cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
-		}
-		else
-		{
-			cout << "\033[1;31mTest Failed\033[0m\n \n" << endl;
-			cout << "Using reverse() on array and printing it... " << endl
-				<< "Expected: " << reversedArray << "\n"
-				<< "Got     : " << resultfromReverse
-				<< "\n" << endl;
-			return 1311;
-		}
+		cout << "\033[1;32mTest Passed\033[0m\n \n" << endl;
 	}
 	catch (...)
 	{
@@ -333,44 +327,33 @@ bool test3()
 	}
 
 	return 0;
+
 }
 
 int main(int argc, char* argv[])
 {
-	int result = 0; // Initialized to 0 to prevent uninitialized local variable warning
-
 	// check num of arguments
 	if (argc < 2 || argc > 3)
 	{
 		std::cerr <<
 			"Wrong number of main arguments\n" <<
 			"Expected 1 argument - test number\n" <<
-			"Usage example: ./Ex1Part2Test 3" << std::endl;
-		return 3;
+			"Usage example: ./Ex1Part1Test 3" << std::endl;
+		exit(3);
 	}
 
-	int testNum = std::atoi(argv[1]);
-
-	if (testNum == 1)
+	if (atoi(argv[1]) == 1)
 	{
-		result = test1();
-		cout << (result == 0 ? "\033[1;32m \n****** Part 3 Test 1 Passed ******\033[0m\n \n" : "\033[1;31mPart 3 Test 1 Failed\033[0m\n \n") << endl;
+		bool result = test1();
+		cout << (result == 0 ? "\033[1;32m \n****** Part 1 Test 1 Passed ******\033[0m\n \n" : "\033[1;31mPart 1 Test 1 Failed\033[0m\n \n") << endl;
+		return result;
 	}
-	else if (testNum == 2)
+	else if (atoi(argv[1]) == 2)
 	{
-		result = test2();
-		cout << (result == 0 ? "\033[1;32m \n****** Part 3 Test 2 Passed ******\033[0m\n \n" : "\033[1;31mPart 3 Test 2 Failed\033[0m\n \n") << endl;
-	}
-	else if (testNum == 3)
-	{
-		result = test3();
-		cout << (result == 0 ? "\033[1;32m \n****** Part 4 Test 1 Passed ******\033[0m\n \n" : "\033[1;31mPart 4 Test 1 Failed\033[0m\n \n") << endl;
-	}
-	else
-	{
-		std::cerr << "Invalid test number. Expected 1, 2, or 3." << std::endl;
-		return 1;
+		bool result = test2();
+		cout << (result == 0 ? "\033[1;32m \n****** Part 1 Test 2 Passed ******\033[0m\n \n" : "\033[1;31mPart 1 Test 1 Failed\033[0m\n \n") << endl;
+		return result;
 	}
 
-	return result;
+	return 0;
 }

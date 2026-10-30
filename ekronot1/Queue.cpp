@@ -9,6 +9,8 @@ void initQueue(Queue* q, unsigned int size)
 	q->count = 0;
 	q->maxSize = size;
 	q->elements = new int[size];
+	q->front = 0;
+	q->back = 0;
 }
 /*
 this function cleans the Queue
@@ -20,7 +22,6 @@ void cleanQueue(Queue* q)
 	delete[] q->elements;
 	//i dont know if this is required or not..
 	q->elements = nullptr;
-
 	q->maxSize = 0;
 	q->count = 0;
 }
@@ -33,7 +34,8 @@ void enqueue(Queue* q, unsigned int newValue)
 {
 	if (!isFull(q))
 	{
-		q->elements[q->count] = newValue;
+		q->elements[q->back] = newValue;
+		q->back = (q->back + 1) % q->maxSize;
 		q->count++;
 	}
 
@@ -49,12 +51,9 @@ int dequeue(Queue* q)
 	{
 		return -1;
 	}
-	int value = q->elements[0];
+	int value = q->elements[q->front];
 
-	for (int i = 0; i < q->count - 1; i++)
-	{
-		q->elements[i] = q->elements[i + 1];
-	}
+	q->front = (q->front + 1) % q->maxSize;
 	q->count--;
 	return value;
 }
