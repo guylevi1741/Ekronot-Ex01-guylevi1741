@@ -23,6 +23,8 @@ void cleanQueue(Queue* q)
 	//i dont know if this is required or not..
 	q->elements = nullptr;
 	q->maxSize = 0;
+	q->back = 0;
+	q->front = 0;
 	q->count = 0;
 }
 /*
